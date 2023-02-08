@@ -3,8 +3,8 @@ import Image from "next/image";
 import fs from 'fs'
 import Link from "next/link";
 import { useState } from "react";
-import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box,Icon } from "@chakra-ui/react";
+import { AddIcon,LinkIcon } from "@chakra-ui/icons";
 
 
 export default function Home({ data }: { data: Array<any> }) {
@@ -39,16 +39,24 @@ export default function Home({ data }: { data: Array<any> }) {
 					</Link>
 				</Heading>
 
-				<Box bg='' maxW='720px' h='100%' color='#1D4044' m='0 auto' px='10px'>
+				<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 					<Heading as='h2' size='xl' noOfLines={1} color='#ce2029'
 						mt='32px'
 					>
 						Article
 					</Heading>
 					<HStack spacing={4} mt='16px' mb='32px'>
-						<Tag size='sm' key='sm' variant='subtle' colorScheme='cyan'>
+						<Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
 							<TagLeftIcon boxSize='12px' as={AddIcon} />
-							<TagLabel>Cyan</TagLabel>
+							<TagLabel>CHORD</TagLabel>
+						</Tag>
+						<Tag size='sm' key='sm' variant='solid'>
+							<TagLeftIcon boxSize='12px' as={AddIcon} />
+							<TagLabel>TS</TagLabel>
+						</Tag>
+						<Tag size='sm' key='sm' variant='solid'>
+							<TagLeftIcon boxSize='12px' as={AddIcon} />
+							<TagLabel>BLOG</TagLabel>
 						</Tag>
 					</HStack>
 
@@ -61,9 +69,10 @@ export default function Home({ data }: { data: Array<any> }) {
 										color='#4A5568'
 										mt='24px'
 									>
+										<Icon boxSize='12px' as={LinkIcon} mr='8px'/>
 										{item.title}
 									</Heading>
-									<span>{item.date}</span>
+									<Text fontSize='10px'>{item.date}</Text>
 								</Link>
 							</li>
 						))}
