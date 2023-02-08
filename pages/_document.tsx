@@ -1,10 +1,8 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Link from 'next/link'
-import { ChakraProvider } from '@chakra-ui/react'
 
 export default function Document() {
 	return (
-		<ChakraProvider>
 			<Html lang="ja">
 				<Head />
 				<body>
@@ -17,6 +15,5 @@ export default function Document() {
 					<NextScript />
 				</body>
 			</Html>
-		</ChakraProvider>
 	)
 }

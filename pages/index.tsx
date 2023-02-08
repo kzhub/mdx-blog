@@ -6,13 +6,25 @@ import styles from "@/styles/Home.module.css";
 import fs from 'fs'
 import Link from "next/link";
 import { useState } from "react";
-
+import { Tag,HStack,TagLeftIcon,TagLabel } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 // const inter = Inter({ subsets: ["latin"] });
 
 
-export default function Home({data}:{data:Array<any>}) {
+export default function Home({ data }: { data: Array<any> }) {
 
-	// const [first, setfirst] = useState(second)
+	// use State
+	// const [viewArticles, setArticle] = useState(data)
+
+	// カテゴリの取得
+	const cats: Array<String> = []
+	data.map((cat) => (
+		cats.push(...cat?.tags)
+	))
+	const catResult = new Set(cats)
+	// カテゴリの取得
+
+
 
 	return (
 		<>
@@ -24,7 +36,16 @@ export default function Home({data}:{data:Array<any>}) {
 			</Head>
 			<div className={styles.main}>
 				<h2>Articles</h2>
+				<h3>Tags</h3>	
+				<HStack spacing={4}>
+						<Tag size='sm' key='sm' variant='subtle' colorScheme='cyan'>
+							<TagLeftIcon boxSize='12px' as={AddIcon} />
+							<TagLabel>Cyan</TagLabel>
+						</Tag>
+				</HStack>
+
 				<Link href='/posts/a'>testLink</Link>
+				
 				<ul>
 					{data.map(item => item.title)}
 				</ul>
@@ -36,25 +57,25 @@ export default function Home({data}:{data:Array<any>}) {
 
 
 export async function getStaticProps() {
-	const path = require('path') 
-	const mdxFileNames:Array<String> = fs.readdirSync(path.resolve(".", "pages","posts" ))
+	const path = require('path')
+	const mdxFileNames: Array<String> = fs.readdirSync(path.resolve(".", "pages", "posts"))
 
-	const fileObject = mdxFileNames.map((fileName)=>{
-		const {meta} = require(`./posts/${fileName}`)
-		return{
+	const fileObject = mdxFileNames.map((fileName) => {
+		const { meta } = require(`./posts/${fileName}`)
+		return {
 			...meta,
 			id: fileName.replace(/.mdx$/, "")
 		}
 	})
-	.sort(function(a,b){
-		return(
-			(a.date < b.date) ? 1 : -1
-		)
-	})
+		.sort(function (a, b) {
+			return (
+				(a.date < b.date) ? 1 : -1
+			)
+		})
 
 	return {
 		props: {
-			data:fileObject
+			data: fileObject
 		},
 	};
 }
