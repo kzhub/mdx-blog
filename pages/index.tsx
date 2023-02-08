@@ -1,14 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-// import path from 'path' 
 import fs from 'fs'
 import Link from "next/link";
 import { useState } from "react";
-import { Tag,HStack,TagLeftIcon,TagLabel } from "@chakra-ui/react";
+import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-// const inter = Inter({ subsets: ["latin"] });
 
 
 export default function Home({ data }: { data: Array<any> }) {
@@ -34,21 +30,46 @@ export default function Home({ data }: { data: Array<any> }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className={styles.main}>
-				<h2>Articles</h2>
-				<h3>Tags</h3>	
-				<HStack spacing={4}>
+			<div>
+				<Heading as='h1' fontSize={64}>
+					<Link href='/'>
+						<Center>
+							🦖
+						</Center>
+					</Link>
+				</Heading>
+
+				<Box bg='' maxW='720px' h='100%' color='#1D4044' m='0 auto' px='10px'>
+					<Heading as='h2' size='xl' noOfLines={1} color='#ce2029'
+						mt='32px'
+					>
+						Article
+					</Heading>
+					<HStack spacing={4} mt='16px' mb='32px'>
 						<Tag size='sm' key='sm' variant='subtle' colorScheme='cyan'>
 							<TagLeftIcon boxSize='12px' as={AddIcon} />
 							<TagLabel>Cyan</TagLabel>
 						</Tag>
-				</HStack>
+					</HStack>
 
-				<Link href='/posts/a'>testLink</Link>
-				
-				<ul>
-					{data.map(item => item.title)}
-				</ul>
+					<ul>
+						{/* {data.map(item => item.title)} */}
+						{data.map((item) => (
+							<li>
+								<Link href={`/posts/${item.id}`}>
+									<Heading as='h3' size='md' noOfLines={1} 
+										color='#4A5568'
+										mt='32px'
+										font-fontWeight='300'
+									>
+										{item.title}
+									</Heading>
+									<span>{item.date}</span>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</Box>
 			</div>
 		</>
 	);

@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.10.5",
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
-    "@next/font": "13.1.6",
+    "@next/font": "^13.1.6",
     "@next/mdx": "^13.1.6",
     "@types/node": "18.11.19",
     "@types/react": "18.0.27",
