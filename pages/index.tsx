@@ -3,8 +3,8 @@ import Image from "next/image";
 import fs from 'fs'
 import Link from "next/link";
 import { useState } from "react";
-import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box,Icon } from "@chakra-ui/react";
-import { AddIcon,LinkIcon } from "@chakra-ui/icons";
+import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react";
+import { AddIcon, LinkIcon, SearchIcon } from "@chakra-ui/icons";
 
 
 export default function Home({ data }: { data: Array<any> }) {
@@ -31,45 +31,53 @@ export default function Home({ data }: { data: Array<any> }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div>
-				<Heading as='h1' fontSize={64}>
+				<Heading as='h1' fontSize={64} mt='24px'>
 					<Link href='/'>
 						<Center>
-							🐶
+							🦖🐕
 						</Center>
 					</Link>
 				</Heading>
+				<Text fontSize='8px' color='blackAlpha.300'>
+					<Center>
+						Music Gadget Tech
+					</Center>
+				</Text>
 
 				<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
-					<Heading as='h2' size='xl' noOfLines={1} color='#ce2029'
-						mt='32px'
-					>
-						Article
-					</Heading>
-					<HStack spacing={4} mt='16px' mb='32px'>
-						<Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
-							<TagLeftIcon boxSize='12px' as={AddIcon} />
-							<TagLabel>CHORD</TagLabel>
-						</Tag>
-						<Tag size='sm' key='sm' variant='solid'>
-							<TagLeftIcon boxSize='12px' as={AddIcon} />
-							<TagLabel>TS</TagLabel>
-						</Tag>
-						<Tag size='sm' key='sm' variant='solid'>
-							<TagLeftIcon boxSize='12px' as={AddIcon} />
-							<TagLabel>BLOG</TagLabel>
-						</Tag>
-					</HStack>
+					<Flex mt='32px'>
+						<Center>
+							<HStack spacing={4} mt='16px' mb='16px'>
+								<Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
+									<TagLeftIcon boxSize='12px' as={AddIcon} />
+									<TagLabel>CHORD</TagLabel>
+								</Tag>
+								<Tag size='sm' key='sm' variant='solid'>
+									<TagLeftIcon boxSize='12px' as={AddIcon} />
+									<TagLabel>TS</TagLabel>
+								</Tag>
+								<Tag size='sm' key='sm' variant='solid'>
+									<TagLeftIcon boxSize='12px' as={AddIcon} />
+									<TagLabel>BLOG</TagLabel>
+								</Tag>
+							</HStack>
+						</Center>
+						<Spacer />
+						<Center>
+							<Icon boxSize='16px' as={SearchIcon} mr='8px' />
+						</Center>
+					</Flex>
 
 					<ul>
 						{/* {data.map(item => item.title)} */}
 						{data.map((item) => (
 							<li key={item.id}>
 								<Link href={`/posts/${item.id}`}>
-									<Heading as='h3' size='s' noOfLines={1} 
+									<Heading as='h3' size='s' noOfLines={1}
 										color='#4A5568'
 										mt='24px'
 									>
-										<Icon boxSize='12px' as={LinkIcon} mr='8px'/>
+										<Icon boxSize='12px' as={LinkIcon} mr='8px' />
 										{item.title}
 									</Heading>
 									<Text fontSize='10px'>{item.date}</Text>
