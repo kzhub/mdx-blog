@@ -55,12 +55,11 @@ export default function Home({ data }: { data: Array<any> }) {
 					<ul>
 						{/* {data.map(item => item.title)} */}
 						{data.map((item) => (
-							<li>
+							<li key={item.id}>
 								<Link href={`/posts/${item.id}`}>
 									<Heading as='h3' size='s' noOfLines={1} 
 										color='#4A5568'
 										mt='24px'
-										// font-fontWeight=''
 									>
 										{item.title}
 									</Heading>
