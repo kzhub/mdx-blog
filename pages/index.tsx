@@ -1,24 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import fs from 'fs'
 import Link from "next/link";
-import { useState } from "react";
-import { Tag, HStack, TagLeftIcon, TagLabel, Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react";
-import { AddIcon, LinkIcon, SearchIcon } from "@chakra-ui/icons";
-
+import { Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import Article from "@/components/Article";
 
 export default function Home({ data }: { data: Array<any> }) {
-
-	// use State
-	// const [viewArticles, setArticle] = useState(data)
-
 	// カテゴリの取得
 	const cats: Array<String> = []
 	data.map((cat) => (
 		cats.push(...cat?.tags)
 	))
-	const catResult = new Set(cats)
-	// カテゴリの取得
+	const catResult: any = new Set(cats)
+	const catArray: Array<String> = [...catResult]
+
+	// const Articles:object = {...data}
 
 
 
@@ -30,25 +27,91 @@ export default function Home({ data }: { data: Array<any> }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div>
-				<Heading as='h1' fontSize={64} mt='24px'>
-					<Link href='/'>
-						<Center>
-							🦖🐕
-						</Center>
-					</Link>
-				</Heading>
-				<Text fontSize='8px' color='blackAlpha.300'>
+			<Heading as='h1' fontSize={64} mt='24px'>
+				<Link href='/'>
 					<Center>
-						Music Gadget Tech
+						🦖🐕
 					</Center>
+				</Link>
+			</Heading>
+			<Center>
+				<Text fontSize='8px' color='blackAlpha.300'>
+					Music Gadget Tech
 				</Text>
+			</Center>
 
-				<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
+			<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
+				<Tabs variant='soft-rounded' colorScheme='teal'>
+					<Flex mt='32px'>
+						<Box>
+							<TabList>
+								<Tab>All</Tab>
+								{catArray.map((node) => (
+									<Tab key={`${node}`}>{node}</Tab>
+								))}
+							</TabList>
+						</Box>
+						<Spacer />
+						<Center>
+							<Icon boxSize='16px' as={SearchIcon} mr='8px' />
+						</Center>
+					</Flex>
+
+					<TabPanels>
+						<TabPanel>
+							<Article propData={data} />
+						</TabPanel>
+
+						{/* {catArray.map((node) => (
+							filterFunction
+						))} */}
+
+						{/* {catArray.map(function (value) {
+							const result = data.filter(function(node) {
+								console.log(value)
+								if(node.tags.indexOf(value) === 1){
+									return true
+								}
+							})
+							let a =[...result]
+						})} */}
+
+						{catArray.map(function (value) {
+							console.log(value)
+							const result = data.filter(function(data){
+								if(data.tags.includes(value) === true){
+									return true
+								}
+							})
+							const newArray = [...result]
+
+							return (
+								<TabPanel key='value'>
+									<p>{value}</p>
+									<Article propData={newArray} />
+								</TabPanel>
+							)
+						})} 
+
+
+						{/* {catArray.map((node) => (
+							<TabPanel>
+								<Article propData= {data} />
+							</TabPanel>
+						))} */}
+
+
+					</TabPanels>
+				</Tabs>
+
+			</Box>
+
+
+			{/* <Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 					<Flex mt='32px'>
 						<Center>
 							<HStack spacing={4} mt='16px' mb='16px'>
-								<Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
+								<Tag size='sm' key='sm' variant='solid' colorScheme='teal' >
 									<TagLeftIcon boxSize='12px' as={AddIcon} />
 									<TagLabel>CHORD</TagLabel>
 								</Tag>
@@ -69,7 +132,6 @@ export default function Home({ data }: { data: Array<any> }) {
 					</Flex>
 
 					<ul>
-						{/* {data.map(item => item.title)} */}
 						{data.map((item) => (
 							<li key={item.id}>
 								<Link href={`/posts/${item.id}`}>
@@ -85,8 +147,7 @@ export default function Home({ data }: { data: Array<any> }) {
 							</li>
 						))}
 					</ul>
-				</Box>
-			</div>
+				</Box> */}
 		</>
 	);
 }
