@@ -3,22 +3,17 @@ import fs from 'fs'
 import Link from "next/link";
 import { Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import Article from "@/components/Article";
-import { useState } from "react";
-
-// 以下はコンポーネントにまとめる
-import { useDisclosure } from "@chakra-ui/react";
-import {
-	Modal,
-	ModalOverlay,
+import { Tabs, TabList, TabPanels, Tab, TabPanel,Modal,ModalOverlay,
 	ModalContent,
 	InputGroup,
 	ModalBody,
 	Input,
-	InputLeftElement
+	InputLeftElement,
+	useDisclosure
 } from '@chakra-ui/react'
-import { afterEach } from "node:test";
+import Article from "@/components/Article";
+import { useState } from "react";
+
 
 export default function Home({ data }: { data: Array<any> }) {
 	// カテゴリの取得
@@ -31,38 +26,38 @@ export default function Home({ data }: { data: Array<any> }) {
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
-// for search 
+	// for search 
 	const [searchObject, setSearchObject] = useState([])
 
 
-	
-	
-	const objectSeatch = (searchWord:string) => {
+
+
+	const objectSeatch = (searchWord: string) => {
 		const searchResultObjects = data.filter(function (article) {
-			if(article.title.includes(searchWord) === true){
+			if (article.title.includes(searchWord) === true) {
 				return true
 			}
 		})
-		const arraySearchResult:Array<object> = [...searchResultObjects]
+		const arraySearchResult: any = [...searchResultObjects]
 		// console.log(arraySearchResult)
 		setSearchObject(arraySearchResult)
 	}
 
-	const getInputFunction = (inputValue:string) => {
-		if(inputValue.length > 1){
+	const getInputFunction = (inputValue: string) => {
+		if (inputValue.length > 1) {
 			objectSeatch(inputValue)
-		}else{
+		} else {
 			setSearchObject([])
 		}
 	}
-	
+
 	// モーダルクリック時
 	const openModalCustom = () => {
 		setSearchObject([])	//初期値にもどす
 		onOpen()//モーダルを開くコールバック関数
 	}
-	
-	
+
+
 
 	return (
 		<>
@@ -92,8 +87,9 @@ export default function Home({ data }: { data: Array<any> }) {
 						<InputGroup>
 							<InputLeftElement
 								pointerEvents='none'
-								children={<SearchIcon color='gray.300' />}
-							/>
+							>
+								<SearchIcon color='gray.300' />
+							</InputLeftElement>
 							<Input
 								placeholder='Search article'
 								focusBorderColor='teal.400'
@@ -103,7 +99,7 @@ export default function Home({ data }: { data: Array<any> }) {
 							/>
 						</InputGroup>
 						<Box px="16px">
-							<Article propData={searchObject} />	
+							<Article propData={searchObject} />
 						</Box>
 
 					</ModalBody>
