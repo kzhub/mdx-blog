@@ -12,7 +12,7 @@ const Article = (props:any) => {
 							size='s' 
 							noOfLines={1}
 							color='#4A5568'
-							mt='24px'
+							// my='24px'
 						>
 							<Icon boxSize='12px' as={LinkIcon} mr='8px' />
 							{item.title}

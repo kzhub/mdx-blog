@@ -5,6 +5,20 @@ import { Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react
 import { SearchIcon } from "@chakra-ui/icons";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Article from "@/components/Article";
+import { useState } from "react";
+
+// 以下はコンポーネントにまとめる
+import { useDisclosure } from "@chakra-ui/react";
+import {
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	InputGroup,
+	ModalBody,
+	Input,
+	InputLeftElement
+} from '@chakra-ui/react'
+import { afterEach } from "node:test";
 
 export default function Home({ data }: { data: Array<any> }) {
 	// カテゴリの取得
@@ -14,6 +28,41 @@ export default function Home({ data }: { data: Array<any> }) {
 	))
 	const catResult: any = new Set(cats)
 	const catArray: Array<String> = [...catResult]
+
+	const { isOpen, onOpen, onClose } = useDisclosure()
+
+// for search 
+	const [searchObject, setSearchObject] = useState([])
+
+
+	
+	
+	const objectSeatch = (searchWord:string) => {
+		const searchResultObjects = data.filter(function (article) {
+			if(article.title.includes(searchWord) === true){
+				return true
+			}
+		})
+		const arraySearchResult:Array<object> = [...searchResultObjects]
+		// console.log(arraySearchResult)
+		setSearchObject(arraySearchResult)
+	}
+
+	const getInputFunction = (inputValue:string) => {
+		if(inputValue.length > 1){
+			objectSeatch(inputValue)
+		}else{
+			setSearchObject([])
+		}
+	}
+	
+	// モーダルクリック時
+	const openModalCustom = () => {
+		setSearchObject([])	//初期値にもどす
+		onOpen()//モーダルを開くコールバック関数
+	}
+	
+	
 
 	return (
 		<>
@@ -36,6 +85,32 @@ export default function Home({ data }: { data: Array<any> }) {
 				</Text>
 			</Center>
 
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalBody p="0">
+						<InputGroup>
+							<InputLeftElement
+								pointerEvents='none'
+								children={<SearchIcon color='gray.300' />}
+							/>
+							<Input
+								placeholder='Search article'
+								focusBorderColor='teal.400'
+								_placeholder={{ opacity: 0.4, color: 'inherit' }}
+								color='teal'
+								onChange={(ev) => getInputFunction(ev.target.value)}
+							/>
+						</InputGroup>
+						<Box px="16px">
+							<Article propData={searchObject} />	
+						</Box>
+
+					</ModalBody>
+
+				</ModalContent>
+			</Modal>
+
 			<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 				<Tabs variant='soft-rounded' colorScheme='teal'>
 					<Flex mt='32px'>
@@ -48,7 +123,7 @@ export default function Home({ data }: { data: Array<any> }) {
 							</TabList>
 						</Box>
 						<Spacer />
-						<Center>
+						<Center cursor='pointer' onClick={openModalCustom}>
 							<Icon boxSize='16px' as={SearchIcon} mr='8px' />
 						</Center>
 					</Flex>
@@ -59,7 +134,7 @@ export default function Home({ data }: { data: Array<any> }) {
 						</TabPanel>
 
 						{catArray.map(function (value) {
-							console.log(value)
+							// console.log(value)
 							const result = data.filter(function (data) {
 								if (data.tags.includes(value) === true) {
 									return true
