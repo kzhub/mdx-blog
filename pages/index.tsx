@@ -15,10 +15,6 @@ export default function Home({ data }: { data: Array<any> }) {
 	const catResult: any = new Set(cats)
 	const catArray: Array<String> = [...catResult]
 
-	// const Articles:object = {...data}
-
-
-
 	return (
 		<>
 			<Head>
@@ -62,24 +58,10 @@ export default function Home({ data }: { data: Array<any> }) {
 							<Article propData={data} />
 						</TabPanel>
 
-						{/* {catArray.map((node) => (
-							filterFunction
-						))} */}
-
-						{/* {catArray.map(function (value) {
-							const result = data.filter(function(node) {
-								console.log(value)
-								if(node.tags.indexOf(value) === 1){
-									return true
-								}
-							})
-							let a =[...result]
-						})} */}
-
 						{catArray.map(function (value) {
 							console.log(value)
-							const result = data.filter(function(data){
-								if(data.tags.includes(value) === true){
+							const result = data.filter(function (data) {
+								if (data.tags.includes(value) === true) {
 									return true
 								}
 							})
@@ -91,63 +73,12 @@ export default function Home({ data }: { data: Array<any> }) {
 									<Article propData={newArray} />
 								</TabPanel>
 							)
-						})} 
-
-
-						{/* {catArray.map((node) => (
-							<TabPanel>
-								<Article propData= {data} />
-							</TabPanel>
-						))} */}
-
+						})}
 
 					</TabPanels>
 				</Tabs>
 
 			</Box>
-
-
-			{/* <Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
-					<Flex mt='32px'>
-						<Center>
-							<HStack spacing={4} mt='16px' mb='16px'>
-								<Tag size='sm' key='sm' variant='solid' colorScheme='teal' >
-									<TagLeftIcon boxSize='12px' as={AddIcon} />
-									<TagLabel>CHORD</TagLabel>
-								</Tag>
-								<Tag size='sm' key='sm' variant='solid'>
-									<TagLeftIcon boxSize='12px' as={AddIcon} />
-									<TagLabel>TS</TagLabel>
-								</Tag>
-								<Tag size='sm' key='sm' variant='solid'>
-									<TagLeftIcon boxSize='12px' as={AddIcon} />
-									<TagLabel>BLOG</TagLabel>
-								</Tag>
-							</HStack>
-						</Center>
-						<Spacer />
-						<Center>
-							<Icon boxSize='16px' as={SearchIcon} mr='8px' />
-						</Center>
-					</Flex>
-
-					<ul>
-						{data.map((item) => (
-							<li key={item.id}>
-								<Link href={`/posts/${item.id}`}>
-									<Heading as='h3' size='s' noOfLines={1}
-										color='#4A5568'
-										mt='24px'
-									>
-										<Icon boxSize='12px' as={LinkIcon} mr='8px' />
-										{item.title}
-									</Heading>
-									<Text fontSize='10px'>{item.date}</Text>
-								</Link>
-							</li>
-						))}
-					</ul>
-				</Box> */}
 		</>
 	);
 }
