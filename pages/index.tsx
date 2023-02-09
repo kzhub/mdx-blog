@@ -1,9 +1,20 @@
 import Head from "next/head";
 import fs from 'fs'
-import Link from "next/link";
-import { Text, Heading, Center, Box, Icon, Flex, Spacer } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
-import { Tabs, TabList, TabPanels, Tab, TabPanel,Modal,ModalOverlay,
+
+import { useState } from "react";
+import {
+	Center, 
+	Box, 
+	Icon, 
+	Flex, 
+	Spacer, 
+	Tabs, 
+	TabList, 
+	TabPanels,
+	Tab, 
+	TabPanel,
+	Modal,
+	ModalOverlay,
 	ModalContent,
 	InputGroup,
 	ModalBody,
@@ -11,9 +22,10 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel,Modal,ModalOverlay,
 	InputLeftElement,
 	useDisclosure
 } from '@chakra-ui/react'
-import Article from "@/components/Article";
-import { useState } from "react";
+import { SearchIcon } from "@chakra-ui/icons";
 
+import Article from "@/components/Article";
+import Header from "@/components/Header";
 
 export default function Home({ data }: { data: Array<any> }) {
 	// カテゴリの取得
@@ -30,8 +42,6 @@ export default function Home({ data }: { data: Array<any> }) {
 	const [searchObject, setSearchObject] = useState([])
 
 
-
-
 	const objectSeatch = (searchWord: string) => {
 		const searchResultObjects = data.filter(function (article) {
 			if (article.title.includes(searchWord) === true) {
@@ -39,7 +49,6 @@ export default function Home({ data }: { data: Array<any> }) {
 			}
 		})
 		const arraySearchResult: any = [...searchResultObjects]
-		// console.log(arraySearchResult)
 		setSearchObject(arraySearchResult)
 	}
 
@@ -51,14 +60,11 @@ export default function Home({ data }: { data: Array<any> }) {
 		}
 	}
 
-	// モーダルクリック時
 	const openModalCustom = () => {
-		setSearchObject([])	//初期値にもどす
-		onOpen()//モーダルを開くコールバック関数
+		setSearchObject([])
+		onOpen()
 	}
-
-
-
+	
 	return (
 		<>
 			<Head>
@@ -67,18 +73,8 @@ export default function Home({ data }: { data: Array<any> }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Heading as='h1' fontSize={64} mt='24px'>
-				<Link href='/'>
-					<Center>
-						🦖🐕
-					</Center>
-				</Link>
-			</Heading>
-			<Center>
-				<Text fontSize='8px' color='blackAlpha.300'>
-					Music Gadget Tech
-				</Text>
-			</Center>
+
+			<Header />
 
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
@@ -101,9 +97,7 @@ export default function Home({ data }: { data: Array<any> }) {
 						<Box px="16px">
 							<Article propData={searchObject} />
 						</Box>
-
 					</ModalBody>
-
 				</ModalContent>
 			</Modal>
 
@@ -145,16 +139,12 @@ export default function Home({ data }: { data: Array<any> }) {
 								</TabPanel>
 							)
 						})}
-
 					</TabPanels>
 				</Tabs>
-
 			</Box>
 		</>
 	);
 }
-
-
 
 export async function getStaticProps() {
 	const path = require('path')
