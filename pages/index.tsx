@@ -23,24 +23,30 @@ import {
 	useDisclosure
 } from '@chakra-ui/react'
 import { SearchIcon } from "@chakra-ui/icons";
-
 import Article from "@/components/Article";
 import Header from "@/components/Header";
 
-export default function Home({ data }: { data: Array<any> }) {
+type articleObjectType = {
+	data: String,
+	id: String,
+	imgUrl:String,
+	link:String,
+	outline:String,
+	tags:String[]
+	title:String,
+}
+export default function Home({ data }: { data: Array<articleObjectType> }) {
 	// カテゴリの取得
-	const cats: Array<String> = []
+	const cats: String[] = []
 	data.map((cat) => (
 		cats.push(...cat?.tags)
 	))
-	const catResult: any = new Set(cats)
-	const catArray: Array<String> = [...catResult]
+	const catArray:String[]= Array.from(new Set(cats))
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	// for search 
-	const [searchObject, setSearchObject] = useState([])
-
+	const [searchObject, setSearchObject] = useState<articleObjectType[]>([])
 
 	const objectSeatch = (searchWord: string) => {
 		const searchResultObjects = data.filter(function (article) {
@@ -48,7 +54,7 @@ export default function Home({ data }: { data: Array<any> }) {
 				return true
 			}
 		})
-		const arraySearchResult: any = [...searchResultObjects]
+		const arraySearchResult: articleObjectType[] = [...searchResultObjects]
 		setSearchObject(arraySearchResult)
 	}
 
@@ -124,7 +130,6 @@ export default function Home({ data }: { data: Array<any> }) {
 						</TabPanel>
 
 						{catArray.map(function (value) {
-							// console.log(value)
 							const result = data.filter(function (data) {
 								if (data.tags.includes(value) === true) {
 									return true
