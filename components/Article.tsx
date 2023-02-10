@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Heading,Icon,Text } from "@chakra-ui/react";
-import { AddIcon, LinkIcon, SearchIcon } from "@chakra-ui/icons";
-const Article = (props:any) => {
+import { LinkIcon } from "@chakra-ui/icons";
+type articleObjectType = {
+	data: String,
+	id: String,
+	imgUrl:String,
+	link:String,
+	outline:String,
+	tags:String[]
+	title:String,
+}
+const Article = (props:{propData:articleObjectType[];}) => {
 	return (
 		<ul>
 			{props.propData.map((item:any) => (
@@ -12,7 +21,6 @@ const Article = (props:any) => {
 							size='s' 
 							noOfLines={1}
 							color='#4A5568'
-							// my='24px'
 						>
 							<Icon boxSize='12px' as={LinkIcon} mr='8px' />
 							{item.title}

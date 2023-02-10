@@ -1,11 +1,9 @@
 import Head from "next/head";
 import fs from 'fs'
 
-import { useState } from "react";
+import SearchModal from "@/components/SearchModal";
 import {
-	Center, 
 	Box, 
-	Icon, 
 	Flex, 
 	Spacer, 
 	Tabs, 
@@ -13,18 +11,10 @@ import {
 	TabPanels,
 	Tab, 
 	TabPanel,
-	Modal,
-	ModalOverlay,
-	ModalContent,
-	InputGroup,
-	ModalBody,
-	Input,
-	InputLeftElement,
-	useDisclosure
 } from '@chakra-ui/react'
-import { SearchIcon } from "@chakra-ui/icons";
 import Article from "@/components/Article";
 import Header from "@/components/Header";
+
 
 type articleObjectType = {
 	data: String,
@@ -36,41 +26,13 @@ type articleObjectType = {
 	title:String,
 }
 export default function Home({ data }: { data: Array<articleObjectType> }) {
-	// カテゴリの取得
+	console.log(data)
 	const cats: String[] = []
 	data.map((cat) => (
 		cats.push(...cat?.tags)
 	))
 	const catArray:String[]= Array.from(new Set(cats))
 
-	const { isOpen, onOpen, onClose } = useDisclosure()
-
-	// for search 
-	const [searchObject, setSearchObject] = useState<articleObjectType[]>([])
-
-	const objectSeatch = (searchWord: string) => {
-		const searchResultObjects = data.filter(function (article) {
-			if (article.title.includes(searchWord) === true) {
-				return true
-			}
-		})
-		const arraySearchResult: articleObjectType[] = [...searchResultObjects]
-		setSearchObject(arraySearchResult)
-	}
-
-	const getInputFunction = (inputValue: string) => {
-		if (inputValue.length > 1) {
-			objectSeatch(inputValue)
-		} else {
-			setSearchObject([])
-		}
-	}
-
-	const openModalCustom = () => {
-		setSearchObject([])
-		onOpen()
-	}
-	
 	return (
 		<>
 			<Head>
@@ -81,31 +43,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 			</Head>
 
 			<Header />
-
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalBody p="0">
-						<InputGroup>
-							<InputLeftElement
-								pointerEvents='none'
-							>
-								<SearchIcon color='gray.300' />
-							</InputLeftElement>
-							<Input
-								placeholder='Search article'
-								focusBorderColor='teal.400'
-								_placeholder={{ opacity: 0.4, color: 'inherit' }}
-								color='teal'
-								onChange={(ev) => getInputFunction(ev.target.value)}
-							/>
-						</InputGroup>
-						<Box px="16px">
-							<Article propData={searchObject} />
-						</Box>
-					</ModalBody>
-				</ModalContent>
-			</Modal>
 
 			<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 				<Tabs variant='soft-rounded' colorScheme='teal'>
@@ -119,9 +56,9 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 							</TabList>
 						</Box>
 						<Spacer />
-						<Center cursor='pointer' onClick={openModalCustom}>
-							<Icon boxSize='16px' as={SearchIcon} mr='8px' />
-						</Center>
+
+						<SearchModal data={data} />
+
 					</Flex>
 
 					<TabPanels>
