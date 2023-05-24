@@ -59,10 +59,11 @@ const SearchModal = (props:{ data: articleObjectType[]; }) => {
 		</Center>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
-				<ModalContent>
+				<ModalContent m='40px 10px'>
 					<ModalBody p="0">
 						<InputGroup>
 							<InputLeftElement
+								borderRadius='20px'
 								pointerEvents='none'
 							>
 								<SearchIcon color='gray.300' />
