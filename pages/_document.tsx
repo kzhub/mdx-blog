@@ -9,7 +9,6 @@ export default function Document() {
 				<body>
 					<Header />
 						<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
-						
 							<Main />
 						</Box>
 					<NextScript />

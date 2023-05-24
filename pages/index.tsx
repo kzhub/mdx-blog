@@ -70,7 +70,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 
 							return (
 								<TabPanel key='value'>
-									<p>{value}</p>
 									<Article propData={newArray} />
 								</TabPanel>
 							)
