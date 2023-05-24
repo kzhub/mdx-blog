@@ -40,7 +40,7 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 			</Head>
 
 				<Tabs variant='soft-rounded' colorScheme='teal'>
-					<Flex mt='32px'>
+					<Flex> 
 						<Box>
 							<TabList>
 								<Tab>All</Tab>

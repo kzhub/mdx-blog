@@ -10,7 +10,7 @@ const Header = () => {
 					</Center>
 				</Link>
 			</Heading>
-			<Center>
+			<Center mb='32px'>
 				<Text fontSize='8px' color='blackAlpha.300'>
 					Music Gadget Tech
 				</Text>
