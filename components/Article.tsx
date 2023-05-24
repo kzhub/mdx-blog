@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { Heading,Icon,Text } from "@chakra-ui/react";
+import { Heading, Icon, Text, List, ListItem } from "@chakra-ui/react";
 import { LinkIcon } from "@chakra-ui/icons";
 type articleObjectType = {
 	data: String,
 	id: String,
-	imgUrl:String,
-	link:String,
-	outline:String,
-	tags:String[]
-	title:String,
+	imgUrl: String,
+	link: String,
+	outline: String,
+	tags: String[]
+	title: String,
 }
-const Article = (props:{propData:articleObjectType[];}) => {
+const Article = (props: { propData: articleObjectType[]; }) => {
 	return (
-		<ul>
-			{props.propData.map((item:any) => (
-				<li key={item.id}>
+		<List >
+			{props.propData.map((item: any) => (
+				<ListItem key={item.id} m='8px 0'>
 					<Link href={`/posts/${item.id}`}>
-						<Heading 
-							as='h3' 
-							size='s' 
+						<Heading
+							as='h3'
+							size='s'
 							noOfLines={1}
 							color='#4A5568'
 						>
@@ -27,9 +27,9 @@ const Article = (props:{propData:articleObjectType[];}) => {
 						</Heading>
 						<Text fontSize='10px'>{item.date}</Text>
 					</Link>
-				</li>
+				</ListItem>
 			))}
-		</ul>
+		</List>
 	);
 }
 
