@@ -13,8 +13,6 @@ import {
 	TabPanel,
 } from '@chakra-ui/react'
 import Article from "@/components/Article";
-import Header from "@/components/Header";
-
 
 type articleObjectType = {
 	data: String,
@@ -41,9 +39,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* <Header /> */}
-
-			<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 				<Tabs variant='soft-rounded' colorScheme='teal'>
 					<Flex mt='32px'>
 						<Box>
@@ -82,7 +77,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 						})}
 					</TabPanels>
 				</Tabs>
-			</Box>
 		</>
 	);
 }
