@@ -26,7 +26,6 @@ type articleObjectType = {
 	title:String,
 }
 export default function Home({ data }: { data: Array<articleObjectType> }) {
-	console.log(data)
 	const cats: String[] = []
 	data.map((cat) => (
 		cats.push(...cat?.tags)
@@ -42,7 +41,7 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Header />
+			{/* <Header /> */}
 
 			<Box bg='' maxW='453px' h='100%' color='#1D4044' m='0 auto' px='10px'>
 				<Tabs variant='soft-rounded' colorScheme='teal'>

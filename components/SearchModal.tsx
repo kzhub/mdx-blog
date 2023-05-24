@@ -29,23 +29,22 @@ const SearchModal = (props:{ data: articleObjectType[]; }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	const [searchObject, setSearchObject] = useState<articleObjectType[]>([])
-
-	const objectSeatch = (searchWord: string) => {
+	const objectSearch = (searchWord: string) => {
 		const searchResultObjects = props.data.filter(function (article:any) {
 			if (article.title.includes(searchWord) === true) {
 				return true
 			}
 		})
 		const arraySearchResult: articleObjectType[] = [...searchResultObjects]
-		setSearchObject(arraySearchResult)
+		setSearchObject(searchResultObjects)
 	}
 
 	const getInputFunction = (inputValue: string) => {
 		if (inputValue.length > 1) {
-			objectSeatch(inputValue)
+			objectSearch(inputValue)//2文字以上の場合検索を行う
 		} else {
 			setSearchObject([])
-		}
+		} 
 	}
 
 	const openModalCustom = () => {
