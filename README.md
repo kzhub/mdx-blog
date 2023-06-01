@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-https://mdx-blog-kzhub.vercel.app
+https://mdx-blog-kzhub.vercel.app  
 basicauth demo / test
 
 First, run the development server:
