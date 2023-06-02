@@ -1,13 +1,22 @@
 import { useState } from "react"
 import axios from 'axios'
 import useSWR from "swr"
-import { Skeleton } from "@chakra-ui/react"
+import { SkeletonText,Box,SkeletonCircle} from "@chakra-ui/react"
 
 const GetComments = () => {
 	const { data, isLoading ,error } = useSWR('/api/comments',axios);
 
 	if (isLoading) {
-		return <Skeleton height="200px" />;
+		return <>
+		<Box padding='6' boxShadow='lg' bg='white'>
+			<SkeletonCircle size='10' />
+			<SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+		</Box>
+		<Box padding='6' boxShadow='lg' bg='white'>
+			<SkeletonCircle size='10' />
+			<SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+		</Box>
+		</>;
 	}
 
 	if (error) {
