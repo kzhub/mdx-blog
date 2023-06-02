@@ -6,8 +6,10 @@ import { SkeletonText,Box,SkeletonCircle} from "@chakra-ui/react"
 const GetComments = () => {
 	const path = useRouter()
 	const currentPath = path.asPath
+	const articleId = currentPath.replace(/\/posts\//, "")
 	const { data, isLoading ,error } = useSWR('/api/comments',axios);
 	
+
 	if(currentPath === '/'){
 		return null
 	}
@@ -29,16 +31,19 @@ const GetComments = () => {
 		return <div>Error: {data.status}</div>;
 	}
 
-	return (
-		<>
-			{data.data[0].comments.map((node,index:number) => (
-				<li key={index}>
-					<p>{node.userName}</p>
-					<p>{node.comment}</p>
-				</li>
-			))}
-		</>
-	);
+	if(data){
+		const filteredData = data.data.filter(item => item.articleId == `${articleId}`);
+		return (
+			<>
+				{ filteredData[0].comments.map((node,index:number) => (
+					<li key={index}>
+						<p>{node.userName}</p>
+						<p>{node.comment}</p>
+					</li>
+				))}
+			</>
+		);
+	}
 }
 
 export default GetComments;

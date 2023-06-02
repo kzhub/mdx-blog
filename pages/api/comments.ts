@@ -10,27 +10,44 @@ export default function handler(
   res: NextApiResponse<any>//仮
 ) {
   res.status(200).json([
-		{
-			"articleId": 1,
-			"comments": [
-				{
-					"comment": "コメント1",
-					"userName": "ユーザーネーム"
-				},
-				{
-					"comment": "コメント2",
-					"userName": "ユーザーネーム2"
-				}
-			]
-		},
-		{
-			"articleId": 2,
-			"comments": [
-				{
-					"comment": "コメント3",
-					"userName": "ユーザーネーム3"
-				}
-			]
-		}
-	]);
+    {
+      articleId: 20230601,
+      comments: [
+        {
+          comment: '20230601コメント1',
+          userName: '20230601ユーザーネーム',
+        },
+        {
+          comment: '20230601コメント2',
+          userName: '20230601ユーザーネーム2',
+        },
+      ],
+    },
+    {
+      articleId: 20230602,
+      comments: [
+        {
+          comment: '20230602コメント2',
+          userName: '20230602ユーザーネーム',
+        },
+        {
+          comment: '20230602コメント2',
+          userName: '20230602ユーザーネーム2',
+        },
+      ],
+    },
+    {
+      articleId: 20230603,
+      comments: [
+        {
+          comment: '20230603コメント1',
+          userName: '20230603ユーザーネーム',
+        },
+        {
+          comment: '20230603コメント2',
+          userName: '20230603ユーザーネーム2',
+        },
+      ],
+    },
+  ]);
 }
