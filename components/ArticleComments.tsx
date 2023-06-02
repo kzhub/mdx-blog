@@ -1,4 +1,9 @@
-const ArticleComments = () => {
+type articleCommentType = {
+	comment: String,
+	userName: String,
+}
+const ArticleComments = (props:articleCommentType[]) => {
+	
 	const dummyComment = [
 		{
 			comment: 'コメント1',
@@ -14,7 +19,6 @@ const ArticleComments = () => {
 		},
 	]
 	return (
-		
 		<ol>
 			{dummyComment.map((node,index) => (
 				<li key={index}>
