@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import Article from "@/components/Article";
 import ArticleComments from "@/components/ArticleComments";
+import { useEffect,useState } from "react";
 
 type articleObjectType = {
 	data: String,
@@ -31,6 +32,8 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 	))
 	const catArray:String[]= Array.from(new Set(cats))
 
+	const [comments, setComments] = useState([{"articleId":1,"comments":[{"comment":"コメント1","userName":"ユーザーネーム"},{"comment":"コメント2","userName":"ユーザーネーム2"}]},{"articleId":2,"comments":[{"comment":"コメント3","userName":"ユーザーネーム3"}]}])
+	
 	return (
 		<>
 			<Head>
@@ -39,7 +42,19 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-				<ArticleComments />
+
+			<h2>
+					article1 comment
+				</h2>
+				<ul>
+				{comments[0].comments.map((node) => (
+						<li>
+							<p>{node.userName}</p>
+							<p>{node.comment}</p>
+						</li>
+					))}
+				</ul>
+
 				<Tabs variant='soft-rounded' colorScheme='teal'>
 					<Flex> 
 						<Box>
@@ -102,7 +117,7 @@ export async function getStaticProps() {
 
 	return {
 		props: {
-			data: fileObject
+			data: fileObject,
 		},
 	};
 }
