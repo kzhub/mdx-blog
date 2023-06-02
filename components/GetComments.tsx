@@ -1,10 +1,16 @@
-import { useState } from "react"
 import axios from 'axios'
 import useSWR from "swr"
+import { useRouter } from 'next/router'
 import { SkeletonText,Box,SkeletonCircle} from "@chakra-ui/react"
 
 const GetComments = () => {
+	const path = useRouter()
+	const currentPath = path.asPath
 	const { data, isLoading ,error } = useSWR('/api/comments',axios);
+	
+	if(currentPath === '/'){
+		return null
+	}
 
 	if (isLoading) {
 		return <>
