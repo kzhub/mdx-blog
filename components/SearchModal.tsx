@@ -29,13 +29,16 @@ const SearchModal = (props:{ data: articleObjectType[]; }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	const [searchObject, setSearchObject] = useState<articleObjectType[]>([])
+	
 	const objectSearch = (searchWord: string) => {
 		const searchResultObjects = props.data.filter(function (article:any) {
-			if (article.title.includes(searchWord) === true) {
-				return true
+			const lowerCaseTitle = article.title.toLowerCase()
+			const lowerCaseSearchWord = searchWord.toLowerCase()
+			if (lowerCaseTitle.includes(lowerCaseSearchWord)) {
+				return true;
 			}
 		})
-		const arraySearchResult: articleObjectType[] = [...searchResultObjects]
+
 		setSearchObject(searchResultObjects)
 	}
 
