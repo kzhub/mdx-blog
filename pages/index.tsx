@@ -17,9 +17,6 @@ import Article from "@/components/Article";
 type articleObjectType = {
 	data: String,
 	id: String,
-	imgUrl:String,
-	link:String,
-	outline:String,
 	tags:String[]
 	title:String,
 }
