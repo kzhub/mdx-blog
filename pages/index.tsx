@@ -29,7 +29,7 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 		cats.push(...cat?.tags)
 	))
 	const catArray:String[]= Array.from(new Set(cats))
-	
+
 	return (
 		<>
 			<Head>

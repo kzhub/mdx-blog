@@ -12,6 +12,7 @@ export default function handler(
   res.status(200).json([
     {
       articleId: 20230601,
+			like:10,
       comments: [
         {
           comment: '20230601コメント1',
@@ -25,6 +26,7 @@ export default function handler(
     },
     {
       articleId: 20230602,
+			like:12,
       comments: [
         {
           comment: '20230602コメント2',
@@ -38,6 +40,7 @@ export default function handler(
     },
     {
       articleId: 20230603,
+			like:10,
       comments: [
         {
           comment: '20230603コメント1',
