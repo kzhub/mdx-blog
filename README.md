@@ -1,10 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
+## mdxファイルを元にページを生成するブログテンプレートです
+/pages/postsの内容を元にページを生成します　　
+## SampleSite
 https://mdx-blog-kzhub.vercel.app  
-basicauth demo / test
-
+basicauth demo / test　　
+## 手順
 First, run the development server:
 
 ```bash
