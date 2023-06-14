@@ -1,0 +1,52 @@
+import useSWR, { mutate } from 'swr';
+import { useRouter } from 'next/router'
+import { SkeletonText} from "@chakra-ui/react"
+import { FaHeart,FaRegHeart } from 'react-icons/fa';
+import { useState } from 'react';
+import axios from 'axios';
+
+const GetLikes = () => {
+	const path = useRouter()
+	const currentPath = path.asPath
+	const articleId = currentPath.replace(/\/posts\//, "")
+	const { data, isLoading ,error } = useSWR('/api/getComments',axios);
+
+	const [likeState, setLikeState] = useState(false)
+	const handleClick = async () => {
+		setLikeState(true)
+		try {
+			await axios.post('/api/addLike',{ id: articleId})
+    } catch (error) {
+      console.error('error')
+    }
+	}
+
+	if(currentPath === '/'){
+		return null
+	}
+
+	if (isLoading) {
+		return <>
+			<FaRegHeart /><SkeletonText mt='4'w={8} noOfLines={1} spacing='4' skeletonHeight='4' />
+		</>;
+	}
+
+	if (error) {
+		return <div>Error</div>;
+	}
+
+	if(data){
+		const filteredData = data.data.filter(item => item.id == `${articleId}`);
+		
+		return (
+			<>
+			{likeState === false 
+			?<FaRegHeart onClick={handleClick} /> 
+			:<FaHeart />}
+			{filteredData.length === 0 ?0 :filteredData[0]?.likeCount}
+			</>
+		);
+	}
+}
+
+export default GetLikes;

@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { MDXProvider } from '@mdx-js/react'
 import { Heading } from '@chakra-ui/react'
-import GetComments from '@/components/GetComments'
+import GetLikes from '@/components/GetLikes'
 
 const components = {
 	h1: (props: React.HTMLProps<HTMLHeadingElement>) => (
@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <MDXProvider components={components}>
-				<GetComments />
+				<GetLikes />
         <Component {...pageProps} />
       </MDXProvider>
     </ChakraProvider>
