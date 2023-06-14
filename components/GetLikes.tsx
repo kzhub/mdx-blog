@@ -37,15 +37,14 @@ const GetLikes = () => {
 
 	if(data){
 		const filteredData = data.data.filter(item => item.id == `${articleId}`);
-		
+		const likeCount = filteredData[0]?.likeCount !== undefined ? filteredData[0]?.likeCount : 0;
+
 		return (
 			<>
 			{likeState === false 
-			?<FaRegHeart onClick={() => handleClick(filteredData[0]?.likeCount)} /> 
+			?<FaRegHeart onClick={() => handleClick(likeCount)} /> 
 			:<FaHeart />}
-			{filteredData.length === 0 
-			? 0
-			: filteredData[0]?.likeCount}
+			{likeCount}
 			</>
 		);
 	}

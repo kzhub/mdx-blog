@@ -6,7 +6,9 @@ export default async function handler(req, res) {
 	const {id,currentLike} = req.body
 	try {
 		if(currentLike === 0){
-		console.log('hello')
+			const newLikes = await prisma.articleLikes.create({
+				data: { id: id, likeCount: 1 },
+			});
 		}else{
 			const updatedLikes = await prisma.articleLikes.update({
 				where: { id: `${id}` },
