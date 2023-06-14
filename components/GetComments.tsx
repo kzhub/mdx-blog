@@ -28,22 +28,29 @@ const GetComments = () => {
 	}
 
 	if (error) {
-		return <div>Error: {data.status}</div>;
+		return <div>Error</div>;
 	}
 
 	if(data){
-		const filteredData = data.data.filter(item => item.articleId == `${articleId}`);
+		const filteredData = data.data.filter(item => item.id == `${articleId}`);
+		
 		return (
 			<>
-				{ filteredData[0].comments.map((node,index:number) => (
-					<li key={index}>
-						<p>{node.userName}</p>
-						<p>{node.comment}</p>
-					</li>
-				))}
+				<p>like:{filteredData.length === 0 ?0 :filteredData[0]?.likeCount}</p>
 			</>
 		);
 	}
 }
 
 export default GetComments;
+
+const comment = [
+	{
+		id:'aaa'
+		,like:12
+	},
+	{
+		id:'bbb'
+		,like:1
+	}
+]
