@@ -12,10 +12,10 @@ const GetLikes = () => {
 	const { data, isLoading ,error } = useSWR('/api/getComments',axios);
 
 	const [likeState, setLikeState] = useState(false)
-	const handleClick = async () => {
+	const handleClick = async (currentLikeValue:number) => {
 		setLikeState(true)
 		try {
-			await axios.post('/api/addLike',{ id: articleId})
+			await axios.post('/api/addLike',{ id: articleId,currentLike:currentLikeValue})
     } catch (error) {
       console.error('error')
     }
@@ -41,9 +41,11 @@ const GetLikes = () => {
 		return (
 			<>
 			{likeState === false 
-			?<FaRegHeart onClick={handleClick} /> 
+			?<FaRegHeart onClick={() => handleClick(filteredData[0]?.likeCount)} /> 
 			:<FaHeart />}
-			{filteredData.length === 0 ?0 :filteredData[0]?.likeCount}
+			{filteredData.length === 0 
+			? 0
+			: filteredData[0]?.likeCount}
 			</>
 		);
 	}
