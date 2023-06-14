@@ -12,7 +12,6 @@ import {
 	TabPanel,
 } from '@chakra-ui/react'
 import Article from "@/components/Article";
-import GetComments from "@/components/GetComments";
 
 type articleObjectType = {
 	data: String,

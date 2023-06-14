@@ -22,8 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <MDXProvider components={components}>
-        <Component {...pageProps} />
 				<GetComments />
+        <Component {...pageProps} />
       </MDXProvider>
     </ChakraProvider>
   )

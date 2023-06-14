@@ -2,12 +2,13 @@ import axios from 'axios'
 import useSWR from "swr"
 import { useRouter } from 'next/router'
 import { SkeletonText,Box,SkeletonCircle} from "@chakra-ui/react"
+import LikeButton from './LikeButton'
 
 const GetComments = () => {
 	const path = useRouter()
 	const currentPath = path.asPath
 	const articleId = currentPath.replace(/\/posts\//, "")
-	const { data, isLoading ,error } = useSWR('/api/comments',axios);
+	const { data, isLoading ,error } = useSWR('/api/getComments',axios);
 	
 
 	if(currentPath === '/'){
@@ -36,21 +37,10 @@ const GetComments = () => {
 		
 		return (
 			<>
-				<p>like:{filteredData.length === 0 ?0 :filteredData[0]?.likeCount}</p>
+				<LikeButton id={articleId} />{filteredData.length === 0 ?0 :filteredData[0]?.likeCount}
 			</>
 		);
 	}
 }
 
 export default GetComments;
-
-const comment = [
-	{
-		id:'aaa'
-		,like:12
-	},
-	{
-		id:'bbb'
-		,like:1
-	}
-]
