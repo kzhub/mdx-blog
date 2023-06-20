@@ -74,8 +74,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 						})}
 					</TabPanels>
 				</Tabs>
-
-
 		</>
 	);
 }
