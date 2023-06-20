@@ -1,4 +1,4 @@
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { SkeletonText } from "@chakra-ui/react";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -9,14 +9,13 @@ const GetLikes = () => {
 	const path = useRouter();
 	const currentPath = path.asPath;
 	const articleId = currentPath.replace(/\/posts\//, "");
-	const { data, isLoading, error } = useSWR<any>('/api/getComments', axios);
+	const { data, isLoading, error } = useSWR<any>('/api/getLikes', axios);
 
 	const [likeState, setLikeState] = useState(false);
 	const handleClick = async (currentLikeValue: number) => {
 		setLikeState(true);
 		try {
 			await axios.post('/api/addLike', { id: articleId, currentLike: currentLikeValue });
-			mutate('/api/getComments');
 		} catch (error) {
 			console.error('error');
 		}
