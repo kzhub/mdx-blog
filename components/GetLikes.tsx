@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import { SkeletonText } from "@chakra-ui/react";
+import { SkeletonText, HStack, Text } from "@chakra-ui/react";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState } from 'react';
 import axios from 'axios';
@@ -29,7 +29,9 @@ const GetLikes = () => {
 	if (isLoading) {
 		return (
 			<>
-				<FaRegHeart /><SkeletonText mt='4' w={8} noOfLines={1} spacing='4' skeletonHeight='4' />
+				<HStack spacing={2} mb='2'>
+					<FaRegHeart /><SkeletonText mt='4' w={8} noOfLines={1} spacing='4' skeletonHeight='4' />
+				</HStack>
 			</>
 		);
 	}
@@ -44,10 +46,14 @@ const GetLikes = () => {
 
 		return (
 			<>
-				{likeState === false
-					? <FaRegHeart onClick={() => handleClick(likeCount)} />
-					: <FaHeart />}
-				{likeCount}
+				<HStack spacing={2} mb='2'>
+					{likeState === false ? (
+						<FaRegHeart onClick={() => handleClick(likeCount)} />
+					) : (
+						<FaHeart />
+					)}
+					<Text fontWeight="bold">{likeCount}</Text>
+				</HStack>
 			</>
 		);
 	}
