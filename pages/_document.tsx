@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Box } from '@chakra-ui/react'
 export default function Document() {
+
 	return (
 			<Html lang="ja">
 				<Head />

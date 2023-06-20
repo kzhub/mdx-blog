@@ -1,6 +1,5 @@
 import Head from "next/head";
 import fs from 'fs'
-
 import SearchModal from "@/components/SearchModal";
 import {
 	Box, 
@@ -27,6 +26,7 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 	))
 	const catArray:String[]= Array.from(new Set(cats))
 
+
 	return (
 		<>
 			<Head>
@@ -35,7 +35,6 @@ export default function Home({ data }: { data: Array<articleObjectType> }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
 				<Tabs variant='soft-rounded' colorScheme='teal'>
 					<Flex> 
 						<Box>
@@ -96,7 +95,7 @@ export async function getStaticProps() {
 
 	return {
 		props: {
-			data: fileObject
+			data: fileObject,
 		},
 	};
 }
