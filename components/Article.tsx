@@ -4,9 +4,6 @@ import { LinkIcon } from "@chakra-ui/icons";
 type articleObjectType = {
 	data: String,
 	id: String,
-	imgUrl: String,
-	link: String,
-	outline: String,
 	tags: String[]
 	title: String,
 }
