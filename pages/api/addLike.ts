@@ -9,13 +9,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			const newLikes = await prisma.articleLikes.create({
 				data: { id: id, likeCount: 1 },
 			});
+			return res.status(200).json({ message: 'Success' });
 		}else{
 			const updatedLikes = await prisma.articleLikes.update({
 				where: { id: `${id}` },
 				data: { likeCount: { increment: 1 } },
 			});
+			return res.status(200).json({ message: 'Success' });
 		}
 	} catch (error) {
-		console.error(error);
+		return res.status(500).json({ error: 'Internal Server Error' })
 	}
 }

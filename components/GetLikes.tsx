@@ -9,13 +9,14 @@ const GetLikes = () => {
 	const path = useRouter();
 	const currentPath = path.asPath;
 	const articleId = currentPath.replace(/\/posts\//, "");
-	const { data, isLoading, error } = useSWR<any>('/api/getLikes', axios);
+	const { data, isLoading, error, mutate } = useSWR<any>('/api/getLikes', axios);
 
 	const [likeState, setLikeState] = useState(false);
 	const handleClick = async (currentLikeValue: number) => {
 		setLikeState(true);
 		try {
 			await axios.post('/api/addLike', { id: articleId, currentLike: currentLikeValue });
+			mutate(data)
 		} catch (error) {
 			console.error('error');
 		}
